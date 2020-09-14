@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+  <script src="jquery-3.3.1.min.js"></script>
+<script src="newReservation.js"></script>
+
+<title>Insert title here</title>
+</head>
+<body onload="load()">
+	<div id="newApp-form">
+        <h3 class="text-center text-white pt-5">New reseervaton form</h3>
+        <div class="container">
+            <div id="login-row" class="row justify-content-center align-items-center">
+                <div id="login-column" class="col-md-6-primary">
+                    <div id="login-box" class="col-md-12">
+                        <form id="newRes-form" class="form">
+                           
+                            <div class="form-group">
+                                <label for="rooms" class="text-info">Apartment :</label><br>
+                                <select  id="apartmani"> </select>
+                            </div>
+                            
+                               <div class="form-group">
+                                <label for="rooms" class="text-info">Start date:</label><br>
+                                <select id="datumi"> </select>
+                            </div>
+                            
+                              <div class="form-group">
+                                <label for="guests" class="text-info">Nights:</label><br>
+                                <input type="number" name="nights" id="nights" class="form-control" required>
+                            </div>
+                            
+                              <div class="form-group">
+                                <label for="guests" class="text-info">Price:</label><br>
+                                <input type="number" name="price" id="price" class="form-control" required>
+                            </div>
+                            
+                                <div class="form-group">
+                                <label for="message" class="text-info">Message:</label><br>
+                                <input type="text" name="message" id="message" class="form-control" required>
+                            </div>
+                             
+                            
+                                  
+                           
+                            <div class="form-group">
+                                <input type="submit" name="submit" class="btn btn-info btn-md" value="Add">
+                            </div>
+                         
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+	
+</body>
+</html>

@@ -1,0 +1,108 @@
+<<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Add new appatman</title>
+<script src="jquery-3.3.1.min.js"></script><script src="login.js"></script>
+<script src="newAppartment.js"></script>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+</head>
+
+<body>
+  
+    <div id="newApp-form">
+        <h3 class="text-center text-white pt-5">New appartment form</h3>
+        <div class="container">
+            <div id="login-row" class="row justify-content-center align-items-center">
+                <div id="login-column" class="col-md-6-primary">
+                    <div id="login-box" class="col-md-12">
+                        <form id="newApp-form" class="form">
+                           
+                            <div class="form-group">
+                                <label for="rooms" class="text-info">Room number:</label><br>
+                                <input type="number" name="rooms" id="rooms" class="form-control" required>
+                            </div>
+                            
+                               <div class="form-group">
+                                <label for="rooms" class="text-info">Type:</label><br>
+                                <select id="appartmentType"> 
+                                <option>APARTMENT </option>
+                                <option>ROOM</option>
+                                 </select>
+                            </div>
+                            
+                              <div class="form-group">
+                                <label for="guests" class="text-info">Number of guests:</label><br>
+                                <input type="number" name="guests" id="guests" class="form-control" required>
+                            </div>
+                            
+                            
+                              <div class="form-group">
+                                <label for="number" class="text-info">Number:</label><br>
+                                <input type="number" name="number" id="number" class="form-control" required>
+                            </div>
+                            
+                            
+                              <div class="form-group">
+                                <label for="street" class="text-info">Street:</label><br>
+                                <input type="text" name="street" id="street" class="form-control" required>
+                            </div>
+                            
+                             <div class="form-group">
+                                <label for="city" class="text-info">City:</label><br>
+                                <input type="text" name="city" id="city" class="form-control" required>
+                            </div>
+                            
+                             <div class="form-group">
+                                <label for="postal" class="text-info">Postval:</label><br>
+                                <input type="text" name="postal" id="postal" class="form-control" required>
+                            </div>
+                            
+                            
+                             <div class="form-group">
+                                <label for="longitude" class="text-info">longitude:</label><br>
+                                <input type="number" name="longitude" id="longitude" class="form-control" required>
+                            </div>
+                           
+                           
+                           
+                             <div class="form-group">
+                                <label for="latitude" class="text-info">latitude:</label><br>
+                                <input type="number" name="latitude" id="latitude" class="form-control" required>
+                            </div>
+                            
+                              <div class="form-group">
+                                <label for="startDate" class="text-info">start Date:</label><br>
+                                <input type="date" name="startDate" id="startDate" class="form-control" required>
+                            </div>
+                            
+                              <div class="form-group">
+                                <label for="endDate" class="text-info">end Date:</label><br>
+                                <input type="date" name="endDate" id="endDate" class="form-control" required>
+                            </div>
+                            
+                               <div class="form-group">
+                                <label for="price" class="text-info">price:</label><br>
+                                <input type="number" name="price" id="price" class="form-control" required>
+                            </div>
+                           
+                           
+                           
+                           
+                            <div class="form-group">
+                                <input type="submit" name="submit" class="btn btn-info btn-md" value="Add">
+                            </div>
+                         
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>
