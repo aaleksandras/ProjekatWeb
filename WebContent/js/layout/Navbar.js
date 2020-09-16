@@ -26,14 +26,18 @@ $(document).ready(() => {
      <li class="nav-item">
       <a class="nav-link" href="hostReservations.html">Reservations</a>
     </li>
+    <li class="nav-item">
+      <a class="nav-link" href="apartmentView.html">Apartments view</a>
+    </li>
 `;
   
  let guestLink = `
-	 <li class="nav-item">
-	 	<a class="nav-link" href="guestReservations.html">My Reservations</a>
-	 </li>
+	 
 	  <li class="nav-item">
 	 	<a class="nav-link" href="newReservation.html">New Reservation</a>
+	 </li>
+	   <li class="nav-item">
+	 	<a class="nav-link" href="guestRes.html">My reservations</a>
 	 </li>
  `;
 

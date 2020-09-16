@@ -1,4 +1,4 @@
-var idd = "Volvo";
+var idd = "";
 
 function load(){
 	$.ajax({
@@ -60,7 +60,7 @@ function dodajDatume(apartmani){
 
 $("document").ready(function(){
 	//Get all apartments types and amenities
-
+	var user = localStorage.getItem("user");
 	
 	  $("#apartmani").on("change", function() {
 			app = $('#apartmani').val();
@@ -80,6 +80,42 @@ $("document").ready(function(){
 				
 			});
 		  });
+	  
+		$('#newRes-form').submit(function(event){
+			event.preventDefault()
+				alert('ziv samm')
+			let apartmentId = $('#apartmani').val()
+			let startDate = $('#dates').val()
+			let nights = $('#nights').val()
+			let price = $('#price').val()
+			let message = $('#message').val()
+		
+		
+			if(apartmentId == "" || startDate == "" || nights== "0" || price == "" ){
+				alert('Fill fields...')
+				return
+			}
+			
+			$.ajax({
+				type:"POST",
+				url: "rest/reservation/add",
+				data: JSON.stringify({
+					apartmentId: apartmentId,
+					startDate: startDate,
+					nights: parseInt(nights),
+					price: parseInt(price),
+					message: message,
+				
+				}),
+				contentType:"application/json",
+				success: function(apartment){
+					alert('crated sucessfully..') },
+					error: function(error){
+						console.log(error)
+						alert('Some error occurred...')
+					}
+				})
+			})
 	
 })
 

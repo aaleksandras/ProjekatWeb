@@ -4,12 +4,15 @@
 <meta charset="ISO-8859-1">
   <script src="jquery-3.3.1.min.js"></script>
 <script src="newReservation.js"></script>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 <title>Insert title here</title>
 </head>
 <body onload="load()">
 	<div id="newApp-form">
-        <h3 class="text-center text-white pt-5">New reseervaton form</h3>
+        <h3 class="text-center text-white pt-5">New reservaton form</h3>
         <div class="container">
             <div id="login-row" class="row justify-content-center align-items-center">
                 <div id="login-column" class="col-md-6-primary">
@@ -23,7 +26,7 @@
                             
                                <div class="form-group">
                                 <label for="rooms" class="text-info">Start date:</label><br>
-                                <select id="datumi"> </select>
+                                <input type="date" name="dates" id="dates" class="form-control" required>
                             </div>
                             
                               <div class="form-group">

@@ -59,6 +59,69 @@ public class ReservationService {
 		ArrayList<Reservation> reservations = readReservations();
 		return Response.status(Response.Status.OK).entity(reservations).build();
 	}
+	
+
+	@PUT
+	@Path("/odustani/{id}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response odustani(@PathParam("id") String id, @Context HttpServletRequest request) throws JsonParseException, JsonMappingException, IOException {
+		User loggedUser = (User) request.getSession().getAttribute("loggedUser");
+		if (loggedUser == null)
+			return Response.status(Response.Status.UNAUTHORIZED).build();
+		
+		ArrayList<Reservation> reservations = readReservations();
+		Reservation r = null;
+		for (Reservation reservation : reservations) {
+			if (reservation.getId().equals(id)) {
+				r = reservation;
+			}
+		}
+		r.setStatus(ReservationStatus.CANCELED);
+		writeReservations(reservations);
+		return Response.status(200).build();
+	}
+	
+	@Path("/myReservations")
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response myReservations() throws JsonParseException, JsonMappingException, IOException {
+		User loggedUser = (User) request.getSession().getAttribute("loggedUser");
+		if (loggedUser == null)
+			return Response.status(Response.Status.UNAUTHORIZED).build();
+	
+
+		ArrayList<Reservation> reservations = readReservations();
+		ArrayList<Reservation> reservations1 = new ArrayList<Reservation>();
+		for (Reservation reservation : reservations) {
+			if(reservation.getGuestId().equals(loggedUser.getId()))
+			{
+			reservations1.add(reservation);
+			}
+		}
+		return Response.status(Response.Status.OK).entity(reservations1).build();
+	}
+	
+	@Path("/add")
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response addReservation(Reservation a) throws JsonParseException, JsonMappingException, IOException {
+	
+		User loggedUser = (User) request.getSession().getAttribute("loggedUser");
+		if (loggedUser == null)
+			return Response.status(Response.Status.UNAUTHORIZED).build();
+		a.setGuestId(loggedUser.getId());
+		a.setStatus(ReservationStatus.CREATED);
+
+		ArrayList<Reservation> reservations = readReservations();
+		
+		
+		reservations.add(a);
+		writeReservations(reservations);
+		return Response.status(Response.Status.OK).entity(a).build();
+	}
+
 
 
 	

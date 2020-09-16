@@ -72,7 +72,7 @@ public class ApartmentService {
 		User loggedUser = (User) request.getSession().getAttribute("loggedUser");
 		if (loggedUser == null)
 			return Response.status(Response.Status.UNAUTHORIZED).build();
-		
+		a.setHostId(loggedUser.getId());
 
 		ArrayList<Apartment> apartments = readApartments();
 		System.out.println(a.getCheckIn());
@@ -95,6 +95,26 @@ public class ApartmentService {
 		ArrayList<Apartment> apartments = readApartments();
 		return Response.status(Response.Status.OK).entity(apartments).build();
 	}
+	
+	@Path("/myAppa")
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getMyApartments() throws JsonParseException, JsonMappingException, IOException {
+		User loggedUser = (User) request.getSession().getAttribute("loggedUser");
+		if (loggedUser == null)
+			return Response.status(Response.Status.UNAUTHORIZED).build();
+	
+		ArrayList<Apartment> apartments = readApartments();
+		//for (Apartment apartment : apartments) {
+			//if(apartment.getHostId().equals(loggedUser.getId())) {
+				//apartments.add(apartment);
+			//}
+	//	}
+		return Response.status(Response.Status.OK).entity(apartments).build();
+	}
+	
+	
+	
 	
 	@Path("/getAll")
 	@GET
