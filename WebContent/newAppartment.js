@@ -18,6 +18,7 @@ $(document).ready(function(){
 
 	$('#newApp-form').submit(function(event){
 		event.preventDefault()
+	
 		let appType = $('#appartmentType').val()
 		let roomsNumber = $('#rooms').val()
 		let guests = $('#guests').val()
