@@ -29,6 +29,9 @@ $(document).ready(() => {
     <li class="nav-item">
       <a class="nav-link" href="apartmentView.html">Apartments view</a>
     </li>
+    <li class="nav-item">
+      <a class="nav-link" href="hostRes.html">My reservations view</a>
+    </li>
 `;
   
  let guestLink = `

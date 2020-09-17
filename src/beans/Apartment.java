@@ -48,7 +48,7 @@ public class Apartment {
 		this.checkOut = checkOut;
 		this.amenitiesId = amenitiesId;
 		this.reservationsId = reservationsId;
-		this.isActive = isActive;
+		this.isActive = true;
 	}
 	
 	

@@ -39,6 +39,25 @@ public class CommentService {
 
 	@Context
 	HttpServletRequest request;
+	
+	
+	@POST
+	@Path("/add")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response addComment(Comment a) throws JsonParseException, JsonMappingException, IOException {
+		System.out.println("juhuu");
+		User loggedUser = (User) request.getSession().getAttribute("loggedUser");
+		if (loggedUser == null)
+			return Response.status(Response.Status.UNAUTHORIZED).build();
+	
+
+		ArrayList<Comment> comments = readComments();
+		
+		comments.add(a);
+		writeComments(comments);
+		return Response.status(Response.Status.OK).entity(a).build();
+	}
 
 
 	@Path("/apartment/{id}/admin-host")

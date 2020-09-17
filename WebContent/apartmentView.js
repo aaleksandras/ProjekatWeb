@@ -5,9 +5,12 @@ function load(){
 		success: function(apartmani) {
 			if(apartmani==null){		
 			}else {
-				alert('ziv sam');
+				alert('ziv sam ii tu sam');
 				for(g of apartmani){
-				ispisiApartmane(g);	
+					//if(g.isActive===true){
+						ispisiApartmane(g);	
+				//	}
+				
 			} 
 			}
 		}
@@ -32,6 +35,29 @@ function ispisiApartmane(u){
 	let location1 = $('<p>=Grad: '+u.location.address.city+'</p>');
 	td2.append(rooms).append(type).append(guests).append(location).append(location2).append(location1);
 	
+	let aObrsi = $('<a href="">Obrisi</a>');
+	aObrsi.click(function(event){
+		event.preventDefault();
+		let id = u.id;
+		$.ajax({
+			url:'rest/apartment/obrisi/'+id,
+			type:'PUT',
+			success: function(){
+				$.get({
+					url : 'rest/apartment/myAppa',
+					success : function(res) {
+						window.location.reload(true);
+						for(acc of res){
+							ispisiApartmane(g);	
+						}
+					}
+				});
+			}
+		});
+	});
+
+	td2.append(aObrsi);
+
 	
 		tr.append(td2);
 	
