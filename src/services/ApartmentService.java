@@ -42,6 +42,8 @@ import beans.Amenity;
 import beans.Apartment;
 import beans.ApartmentType;
 import beans.Comment;
+import beans.Reservation;
+import beans.ReservationStatus;
 import beans.Role;
 import beans.User;
 import config.PathConfig;
@@ -73,6 +75,7 @@ public class ApartmentService {
 		if (loggedUser == null)
 			return Response.status(Response.Status.UNAUTHORIZED).build();
 		a.setHostId(loggedUser.getId());
+		a.setActive(true);
 
 		ArrayList<Apartment> apartments = readApartments();
 		System.out.println(a.getCheckIn());
@@ -105,12 +108,13 @@ public class ApartmentService {
 			return Response.status(Response.Status.UNAUTHORIZED).build();
 	
 		ArrayList<Apartment> apartments = readApartments();
-		//for (Apartment apartment : apartments) {
-			//if(apartment.getHostId().equals(loggedUser.getId())) {
-				//apartments.add(apartment);
-			//}
-	//	}
-		return Response.status(Response.Status.OK).entity(apartments).build();
+		ArrayList<Apartment> apartmentss = new ArrayList<Apartment>();
+		for (Apartment apartment : apartments) {
+			if(apartment.getHostId().equals(loggedUser.getId()) && apartment.isActive()) {
+				apartmentss.add(apartment);
+			}
+		}
+		return Response.status(Response.Status.OK).entity(apartmentss).build();
 	}
 	
 	
@@ -125,7 +129,36 @@ public class ApartmentService {
 			return Response.status(Response.Status.UNAUTHORIZED).build();
 	
 		ArrayList<Apartment> apartments = readApartments();
-		return Response.status(Response.Status.OK).entity(apartments).build();
+		
+		ArrayList<Apartment> apartmentss = readApartments();
+		for (Apartment apartment : apartments) {
+			if(apartment.isActive()) {
+				apartmentss.add(apartment);
+			}
+		}
+		
+		return Response.status(Response.Status.OK).entity(apartmentss).build();
+	}
+	
+	@PUT
+	@Path("/obrisi/{id}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response obrsi(@PathParam("id") String id, @Context HttpServletRequest request) throws JsonParseException, JsonMappingException, IOException {
+		User loggedUser = (User) request.getSession().getAttribute("loggedUser");
+		if (loggedUser == null)
+			return Response.status(Response.Status.UNAUTHORIZED).build();
+		
+		ArrayList<Apartment> apartments = readApartments();
+		Apartment r = null;
+		for (Apartment apartment : apartments) {
+			if (apartment.getId().equals(id)) {
+				r = apartment;
+			}
+		}
+		r.setActive(false);
+		writeApartments(apartments);
+		return Response.status(200).build();
 	}
 	
 	@Path("/getDates/{id}")

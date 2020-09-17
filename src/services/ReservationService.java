@@ -82,6 +82,69 @@ public class ReservationService {
 		return Response.status(200).build();
 	}
 	
+	@PUT
+	@Path("/prihvati/{id}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response prihvati(@PathParam("id") String id, @Context HttpServletRequest request) throws JsonParseException, JsonMappingException, IOException {
+		User loggedUser = (User) request.getSession().getAttribute("loggedUser");
+		if (loggedUser == null)
+			return Response.status(Response.Status.UNAUTHORIZED).build();
+		
+		ArrayList<Reservation> reservations = readReservations();
+		Reservation r = null;
+		for (Reservation reservation : reservations) {
+			if (reservation.getId().equals(id)) {
+				r = reservation;
+			}
+		}
+		r.setStatus(ReservationStatus.ACCEPTED);
+		writeReservations(reservations);
+		return Response.status(200).build();
+	}
+	
+	@PUT
+	@Path("/odbij/{id}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response odbij(@PathParam("id") String id, @Context HttpServletRequest request) throws JsonParseException, JsonMappingException, IOException {
+		User loggedUser = (User) request.getSession().getAttribute("loggedUser");
+		if (loggedUser == null)
+			return Response.status(Response.Status.UNAUTHORIZED).build();
+		
+		ArrayList<Reservation> reservations = readReservations();
+		Reservation r = null;
+		for (Reservation reservation : reservations) {
+			if (reservation.getId().equals(id)) {
+				r = reservation;
+			}
+		}
+		r.setStatus(ReservationStatus.REJECTED);
+		writeReservations(reservations);
+		return Response.status(200).build();
+	}
+	
+	@PUT
+	@Path("/zavrsi/{id}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response zavrsi(@PathParam("id") String id, @Context HttpServletRequest request) throws JsonParseException, JsonMappingException, IOException {
+		User loggedUser = (User) request.getSession().getAttribute("loggedUser");
+		if (loggedUser == null)
+			return Response.status(Response.Status.UNAUTHORIZED).build();
+		
+		ArrayList<Reservation> reservations = readReservations();
+		Reservation r = null;
+		for (Reservation reservation : reservations) {
+			if (reservation.getId().equals(id)) {
+				r = reservation;
+			}
+		}
+		r.setStatus(ReservationStatus.ENDED);
+		writeReservations(reservations);
+		return Response.status(200).build();
+	}
+	
 	@Path("/myReservations")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
@@ -97,6 +160,45 @@ public class ReservationService {
 			if(reservation.getGuestId().equals(loggedUser.getId()))
 			{
 			reservations1.add(reservation);
+			}
+		}
+		return Response.status(Response.Status.OK).entity(reservations1).build();
+	}
+	
+	@Path("/hostReservations")
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response hostReservations() throws JsonParseException, JsonMappingException, IOException {
+		User loggedUser = (User) request.getSession().getAttribute("loggedUser");
+		if (loggedUser == null)
+			return Response.status(Response.Status.UNAUTHORIZED).build();
+		
+		ArrayList<Apartment> apartments = readApartments();
+		ArrayList<Reservation> reservations = readReservations();
+		
+		ArrayList<Reservation> reservations1 = new ArrayList<Reservation>();
+		ArrayList<Apartment> apartmani = new ArrayList<Apartment>();
+		
+		for (Apartment apartment : apartments) {
+			if(apartment.getHostId().equals(loggedUser.getId()))
+			{
+				apartmani.add(apartment);
+			}
+		}
+	
+
+	
+		
+		for (Reservation reservation : reservations) {
+			
+			for(Apartment ap : apartmani)
+			{
+
+				if(reservation.getApartmentId().equals(ap.getId()))
+				{
+		
+					reservations1.add(reservation);
+				}
 			}
 		}
 		return Response.status(Response.Status.OK).entity(reservations1).build();

@@ -87,11 +87,11 @@ $("document").ready(function(){
 			let apartmentId = $('#apartmani').val()
 			let startDate = $('#dates').val()
 			let nights = $('#nights').val()
-			let price = $('#price').val()
+			
 			let message = $('#message').val()
 		
 		
-			if(apartmentId == "" || startDate == "" || nights== "0" || price == "" ){
+			if(apartmentId == "" || startDate == "" || nights== "0"  ){
 				alert('Fill fields...')
 				return
 			}
@@ -103,7 +103,7 @@ $("document").ready(function(){
 					apartmentId: apartmentId,
 					startDate: startDate,
 					nights: parseInt(nights),
-					price: parseInt(price),
+					
 					message: message,
 				
 				}),
